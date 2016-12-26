@@ -1,0 +1,2224 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Test
+  description: ""
+  contact:
+    email: docs@zuora.com
+  x-logo:
+    url: 'https://dl.dropboxusercontent.com/u/99612594/zuoralogo.png'
+host: rest.zuora.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json; charset=utf-8
+consumes:
+  - application/json; charset=utf-8
+tags: 
+  - name: Actions
+    description: ""
+  - name: Accounting Codes
+    description: ""
+  - name: Accounting Periods
+    description: ""
+  - name: Accounts
+    description: ""
+  - name: Amendments
+    description: ""
+  - name: Attachments
+    description: ""
+  - name: Catalog
+    description: ""
+  - name: Charge Revenue Summaries
+    description: ""
+  - name: Communication Profiles
+    description: ""
+  - name: Connections
+    description: ""
+  - name: Contacts
+    description: ""
+  - name: Credit Balance Adjustments
+    description: ""
+  - name: Custom Exchange Rates
+    description: ""
+  - name: Exports
+    description: ""
+  - name: Features
+    description: ""
+  - name: Get Files
+    description: ""
+  - name: HMAC Signatures
+    description: "" 
+  - name: Hosted Pages
+    description: ""
+  - name: Imports
+    description: ""
+  - name: Invoice Adjustments
+    description: ""
+  - name: Invoice Item Adjustments
+    description: ""
+  - name: Invoice Items
+    description: ""
+  - name: Invoice Payments
+    description: ""
+  - name: Invoice Split Items
+    description: ""
+  - name: Invoice Splits
+    description: ""
+  - name: Invoices
+    description: ""
+  - name: Journal Runs
+    description: ""
+  - name: Mass Updater
+    description: ""
+  - name: Notification History
+    description: ""
+  - name: Operations
+    description: ""
+  - name: Payment Method Snapshots
+    description: ""
+  - name: Payment Method Transaction Logs
+    description: ""
+  - name: Payment Methods
+    description: ""
+  - name: Payment Transaction Logs
+    description: ""
+  - name: Payments
+    description: ""
+  - name: Product Features
+    description: ""
+  - name: Product Rate Plan Charge Tiers
+    description: ""
+  - name: Product Rate Plan Charges
+    description: ""
+  - name: Product Rate Plans
+    description: ""
+  - name: Products
+    description: ""
+  - name: Quotes Document
+    description: ""
+  - name: Rate Plan Charge Tiers
+    description: ""
+  - name: Rate Plan Charges
+    description: ""
+  - name: Rate Plans
+    description: ""
+  - name: Refund Invoice Payments
+    description: ""
+  - name: Refund Transaction Logs
+    description: ""
+  - name: Refunds
+    description: ""
+  - name: Revenue Events
+    description: "" 
+  - name: Revenue Items
+    description: ""
+  - name: Revenue Rules
+    description: ""
+  - name: Revenue Schedules
+    description: ""
+  - name: RSA Signatures
+    description: "" 
+  - name: Settings
+    description: ""  
+  - name: Subscription Product Features
+    description: ""    
+  - name: Subscriptions
+    description: ""
+  - name: Summary Journal Entries
+    description: ""
+  - name: Taxation Items
+    description: ""
+  - name: Transactions
+    description: "" 
+  - name: Unit Of Measure
+    description: ""
+  - name: Usage
+    description: ""
+
+paths:
+
+
+
+
+## START OF ACCOUNTS
+
+# CREATE ACCOUNT
+  '/accounts':
+    post:
+      summary: Create account
+      operationId: POST_Account
+      description: ""
+      tags:
+        - Accounts
+
+      parameters:
+              
+        - name: zuora-version
+          in: header
+          required: false
+          type: string
+          description: ""
+        
+        - name: Request
+          in: body
+          description: ""
+          required: true
+          schema:
+            $ref: '#/definitions/POSTAccountType'
+      
+      responses:
+        '200':
+          examples:
+            application/json:
+              {
+                "name": "Zuora Test Account",
+                "currency": "USD",
+                "notes": "This account is for demo purposes.",
+                "billCycleDay": 0,
+                "autoPay": false,
+                "paymentTerm": "Due Upon Receipt",
+                "billToContact": {
+                  "address1": "1051 E Hillsdale Blvd",
+                  "city": "Foster City",
+                  "country": "United States",
+                  "firstName": "John",
+                  "lastName": "Smith",
+                  "zipCode": "94404",
+                  "state": "CA",
+                  "workEmail": "john.smith@test.com"
+                },
+                "hpmCreditCardPaymentMethodId": "2c92c0f93cf64d94013cfe2d20db61a7",
+                "subscription": {
+                  "termType": "TERMED",
+                  "initialTerm": 12,
+                  "renewalTerm": 12,
+                  "autoRenew": true,
+                  "notes": "This is a trial subscription for POST account demo.",
+                  "subscribeToRatePlans": [{
+                    "productRatePlanId": "2c92c0f94ac8307f014ae5d3d1d469e2",
+                    "chargeOverrides": [{
+                      "productRatePlanChargeId": "2c92c0f94ac8307f014ae5d4a5156b28",
+                      "price": 1000
+                    }, {
+                      "productRatePlanChargeId": "2c92c0f94ac8307f014ae5dbe2947851",
+                      "price": 1000
+                    }]
+                  }, {
+                    "productRatePlanId": "2c92c0f93cf64d94013d027681560341",
+                    "chargeOverrides": [{
+                      "productRatePlanChargeId": "2c92c0f83cf64298013d027725a67b7b",
+                      "price": 1000
+                    }]
+                  }],
+                  "contractEffectiveDate": "2016-01-01"
+                },
+                "invoice": true,
+                "collect": false
+              }    
+          description: ""
+          schema:
+            $ref: '#/definitions/POSTAccountResponseType'
+
+
+     
+            
+  '/accounts/{account-key}':
+# GET ACCOUNT
+    get:
+      summary: Get account
+      operationId: GET_Account
+      description: ""
+      tags:
+        - Accounts
+
+      parameters:
+        - name: account-key
+          in: path
+          description: ""
+          required: true
+          type: string
+      responses:
+        '200':
+          examples:
+            application/json:
+              {
+                "basicInfo": {
+                  "id": "402892c74c9193cd014c91d35b0a0132",
+                  "name": "Test",
+                  "accountNumber": "A00000001",
+                  "notes": "",
+                  "status": "Active",
+                  "crmId": "",
+                  "batch": "Batch1",
+                  "invoiceTemplateId": null,
+                  "communicationProfileId": "303d186840e611df817c002185d714e1"
+                },
+                "billingAndPayment": {
+                  "billCycleDay": 1,
+                  "currency": "USD",
+                  "paymentTerm": "Net 30",
+                  "paymentGateway": "TestGateway"
+                },
+                "metrics": {
+                  "balance": 0,
+                  "totalInvoiceBalance": 0,
+                  "creditBalance": 0,
+                  "contractedMrr": -900
+                },
+                "billToContact": {
+                  "address1": "",
+                  "address2": "",
+                  "city": "",
+                  "country": null,
+                  "county": null,
+                  "fax": "",
+                  "firstName": "Test",
+                  "homePhone": "",
+                  "lastName": "Test",
+                  "mobilePhone": "",
+                  "nickname": "",
+                  "otherPhone": "",
+                  "otherPhoneType": null,
+                  "personalEmail": "",
+                  "state": "",
+                  "taxRegion": null,
+                  "workEmail": "Test@zuora.com",
+                  "workPhone": "",
+                  "zipCode": ""
+                },
+                "soldToContact": {
+                  "address1": "",
+                  "address2": "",
+                  "city": "",
+                  "country": null,
+                  "county": null,
+                  "fax": "",
+                  "firstName": "Test",
+                  "homePhone": "",
+                  "lastName": "Test",
+                  "mobilePhone": "",
+                  "nickname": "",
+                  "otherPhone": "",
+                  "otherPhoneType": null,
+                  "personalEmail": "",
+                  "state": "",
+                  "taxRegion": null,
+                  "workEmail": "Test@zuora.com",
+                  "workPhone": "",
+                  "zipCode": ""
+                },
+                "success": true
+              }    
+          description: ""
+          schema:
+            $ref: '#/definitions/GETAccountType'
+
+            
+  
+            
+            
+# UPDATE ACCOUNT            
+    put:
+      summary: Update account
+      operationId: PUT_Account
+      description: ""      
+      tags:
+        - Accounts
+
+      parameters:
+        - name: account-key
+          in: path
+          required: true
+          type: string
+          description: ""
+        - name: Request
+          in: body
+          description: ""
+          required: true
+          schema:
+            $ref: '#/definitions/PUTAccountType'
+      responses:
+        '200':
+          examples:
+            application/json:
+              {
+                "success": true
+              }
+          description: ""
+          schema:
+            $ref: '#/definitions/CommonResponseType'
+
+           
+            
+            
+            
+# GET ACCOUNT SUMMARY            
+  '/accounts/{account-key}/summary':
+    get:
+      summary: Get account summary
+      operationId: GET_AccountSummary
+      description: ""      
+      tags:
+        - Accounts
+
+      parameters:
+        - name: account-key
+          in: path
+          required: true
+          type: string
+          description: ""
+      responses:
+        '200':
+          examples:
+            application/json:
+              {
+                "payments": [{
+                  "paidInvoices": [{
+                    "invoiceNumber": "INV00000159",
+                    "appliedPaymentAmount": 5.0,
+                    "invoiceId": "2c92a09539190dbe0139190f42780012"
+                  }, {
+                    "invoiceNumber": "INV00000323",
+                    "appliedPaymentAmount": 139722.1,
+                    "invoiceId": "2c92a0953a3fa95d013a407c10a60100"
+                  }, {
+                    "invoiceNumber": "INV00000160",
+                    "appliedPaymentAmount": 10521.0,
+                    "invoiceId": "2c92a09739190dc60139194bcf1b0098"
+                  }],
+                  "paymentNumber": "P-00000075",
+                  "status": "Processed",
+                  "effectiveDate": "2013-03-27",
+                  "id": "2c92c8f83dabf9cf013daf3bfa0305a6",
+                  "paymentType": "Electronic"
+                }, {
+                  "paidInvoices": [{
+                    "invoiceNumber": "INV00000159",
+                    "appliedPaymentAmount": 5.0,
+                    "invoiceId": "2c92a09539190dbe0139190f42780012"
+                  }],
+                  "paymentNumber": "P-00000056",
+                  "status": "Processed",
+                  "effectiveDate": "2012-08-11",
+                  "id": "2c92a0f9391832b101391922ad5f049d",
+                  "paymentType": "Electronic"
+                }],
+                "invoices": [{
+                  "amount": 139722.1,
+                  "status": "Posted",
+                  "invoiceNumber": "INV00000323",
+                  "invoiceDate": "2013-02-11",
+                  "balance": 0.0,
+                  "id": "2c92a0953a3fa95d013a407c10a60100",
+                  "dueDate": "2013-02-11"
+                }, {
+                  "amount": 10521.0,
+                  "status": "Posted",
+                  "invoiceNumber": "INV00000160",
+                  "invoiceDate": "2012-08-11",
+                  "balance": 0.0,
+                  "id": "2c92a09739190dc60139194bcf1b0098",
+                  "dueDate": "2012-08-11"
+                }, {
+                  "amount": 10.0,
+                  "status": "Posted",
+                  "invoiceNumber": "INV00000159",
+                  "invoiceDate": "2012-08-11",
+                  "balance": 0.0,
+                  "id": "2c92a09539190dbe0139190f42780012",
+                  "dueDate": "2012-08-11"
+                }],
+                "usage": [{
+                  "unitOfMeasure": "UOM",
+                  "quantity": 10.0,
+                  "startDate": "2012-02"
+                }, {
+                  "unitOfMeasure": "UOM",
+                  "quantity": 10.0,
+                  "startDate": "2012-01"
+                }],
+                "basicInfo": {
+                  "defaultPaymentMethod": {
+                    "creditCardNumber": "************1111",
+                    "paymentMethodType": "CreditCard",
+                    "creditCardExpirationMonth": 10,
+                    "creditCardExpirationYear": 2020,
+                    "creditCardType": "Visa",
+                    "id": "2c92c8f83dabf9cf013daef12dd303b0"
+                  },
+                  "status": "Active",
+                  "lastInvoiceDate": "2013-02-11",
+                  "lastPaymentAmount": 150248.1,
+                  "billCycleDay": 1,
+                  "name": "subscribeCallYan_1",
+                  "balance": 0.0,
+                  "accountNumber": "A00001115",
+                  "id": "2c92a0f9391832b10139183e277a0042",
+                  "dfadsf__c": null,
+                  "currency": "USD",
+                  "lastPaymentDate": "2013-03-27"
+                },
+                "soldToContact": {
+                  "fax": "",
+                  "taxRegion": "",
+                  "country": "United States",
+                  "zipCode": "95135",
+                  "county": "",
+                  "lastName": "Cho",
+                  "workEmail": "work_email@zbcloud.com",
+                  "state": "California",
+                  "address2": "",
+                  "address1": "278 Bridgeton Circle",
+                  "firstName": "Bill",
+                  "id": "2c92a0f9391832b10139183e27940043",
+                  "workPhone": "5555551212",
+                  "city": "San Jose"
+                },
+                "success": true,
+                "subscriptions": [{
+                  "termEndDate": "2014-02-01",
+                  "termStartDate": "2013-02-01",
+                  "status": "Active",
+                  "initialTerm": 12,
+                  "autoRenew": true,
+                  "subscriptionNumber": "A-S00001081",
+                  "subscriptionStartDate": "2013-02-01",
+                  "id": "2c92c8f83dc4f752013dc72c24ee016d",
+                  "ratePlans": [{
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "QSF_Tier"
+                  }],
+                  "termType": "TERMED",
+                  "renewalTerm": 3
+                }, {
+                  "termEndDate": "2014-02-01",
+                  "termStartDate": "2013-02-01",
+                  "status": "Active",
+                  "initialTerm": 12,
+                  "autoRenew": true,
+                  "subscriptionNumber": "A-S00001080",
+                  "subscriptionStartDate": "2013-02-01",
+                  "id": "2c92c8f83dc4f752013dc72bb85c0127",
+                  "ratePlans": [{
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "QSF_Tier"
+                  }],
+                  "termType": "TERMED",
+                  "renewalTerm": 3
+                }, {
+                  "termEndDate": "2014-04-01",
+                  "termStartDate": "2013-12-01",
+                  "status": "Cancelled",
+                  "initialTerm": 10,
+                  "autoRenew": false,
+                  "subscriptionNumber": "A-S00001079",
+                  "subscriptionStartDate": "2013-02-01",
+                  "id": "2c92c8f83dc4f752013dc723fdab00d4",
+                  "ratePlans": [{
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "QSF_Tier"
+                  }],
+                  "termType": "TERMED",
+                  "renewalTerm": 4
+                }, {
+                  "termEndDate": "2012-02-11",
+                  "termStartDate": "2011-02-11",
+                  "status": "Active",
+                  "initialTerm": 12,
+                  "autoRenew": false,
+                  "subscriptionNumber": "A-S00001076",
+                  "subscriptionStartDate": "2011-02-11",
+                  "id": "2c92c8f83db0b4b4013db4717ad000ec",
+                  "ratePlans": [{
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "Month_PerUnit"
+                  }, {
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "Month_PerUnit"
+                  }],
+                  "termType": "TERMED",
+                  "renewalTerm": 3
+                }, {
+                  "termEndDate": "2012-02-11",
+                  "termStartDate": "2011-02-11",
+                  "status": "Active",
+                  "initialTerm": 12,
+                  "autoRenew": false,
+                  "subscriptionNumber": "A-S00001075",
+                  "subscriptionStartDate": "2011-02-11",
+                  "id": "2c92c8f83db0b4b4013db3ab6a4d00bc",
+                  "ratePlans": [{
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "Month_PerUnit"
+                  }, {
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "Month_PerUnit"
+                  }],
+                  "termType": "TERMED",
+                  "renewalTerm": 3
+                }, {
+                  "termEndDate": "2012-02-11",
+                  "termStartDate": "2011-02-11",
+                  "status": "Active",
+                  "initialTerm": 12,
+                  "autoRenew": false,
+                  "subscriptionNumber": "A-S00001074",
+                  "subscriptionStartDate": "2011-02-11",
+                  "id": "2c92c8f83db0b4b4013db3aa9fbd0090",
+                  "ratePlans": [{
+                    "productName": "Recurring Charge",
+                    "ratePlanName": "Month_PerUnit"
+                  }],
+                  "termType": "TERMED",
+                  "renewalTerm": 3
+                }],
+                "billToContact": {
+                  "fax": "",
+                  "taxRegion": "",
+                  "country": "United States",
+                  "zipCode": "95135",
+                  "county": "",
+                  "lastName": "Zou",
+                  "workEmail": "work_email@zbcloud.com",
+                  "state": "California",
+                  "address2": "",
+                  "address1": "1400 Bridge Pkwy",
+                  "firstName": "Cheng",
+                  "id": "2c92a0f9391832b10139183e27940043",
+                  "workPhone": "5555551212",
+                  "city": "San Jose"
+                }
+              }   
+          description: ""
+          schema:
+            $ref: '#/definitions/GETAccountSummaryType'
+
+
+## END OF ACCOUNTS
+
+
+
+
+
+
+definitions:
+  CommonResponseType:
+    properties:
+      success:
+        description: ""
+        type: boolean
+    type: object
+  POSTAccountType:
+    example:
+      autoPay: false
+      billCycleDay: 0
+      billToContact:
+        address1: 1051 E Hillsdale Blvd
+        city: Foster City
+        country: United States
+        firstName: John
+        lastName: Smith
+        state: CA
+        workEmail: john.smith@test.com
+        zipCode: '94404'
+      collect: false
+      currency: USD
+      hpmCreditCardPaymentMethodId: 2c92c0f93cf64d94013cfe2d20db61a7
+      invoice: true
+      name: Zuora Test Account
+      notes: This account is for demo purposes.
+      paymentTerm: Due Upon Receipt
+      subscription:
+        autoRenew: true
+        contractEffectiveDate: '2016-01-01'
+        initialTerm: 12
+        notes: This is a trial subscription for POST account demo.
+        renewalTerm: 12
+        subscribeToRatePlans:
+        - chargeOverrides:
+          - price: 1000
+            productRatePlanChargeId: 2c92c0f94ac8307f014ae5d4a5156b28
+          - price: 1000
+            productRatePlanChargeId: 2c92c0f94ac8307f014ae5dbe2947851
+          productRatePlanId: 2c92c0f94ac8307f014ae5d3d1d469e2
+        - chargeOverrides:
+          - price: 1000
+            productRatePlanChargeId: 2c92c0f83cf64298013d027725a67b7b
+          productRatePlanId: 2c92c0f93cf64d94013d027681560341
+        termType: TERMED
+        
+    required:
+    - name
+    - currency
+    - billToContact
+    properties:
+      accountNumber:
+        description: ""
+        type: string
+        maxLength: 70
+      applyCreditBalance:
+        description: ""
+        type: boolean
+      autoPay:
+        description: ""
+        type: boolean
+        default: true
+      batch:
+        description: ""
+        type: string
+        enum:
+        - Batch1
+        - Batch2
+        - Batch3
+      billCycleDay:
+        description: ""
+        format: int64
+        type: integer
+        minimum: 0
+        maximum: 31
+      billToContact:
+        description: ""
+        required:
+        - firstName
+        - lastName
+        properties:
+          address1:
+            description: ""
+            type: string
+            maxLength: 255
+          address2:
+            description: ""
+            type: string
+            maxLength: 255
+          city:
+            description: ""
+            type: string
+            maxLength: 40
+          country:
+            description: ""
+            type: string
+            maxLength: 64
+          county:
+            description: ""
+            type: string
+            maxLength: 32
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+            maxLength: 40
+          firstName:
+            description: ""
+            type: string
+            maxLength: 100
+          homePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          lastName:
+            description: ""
+            type: string
+            maxLength: 100
+          mobilePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          nickname:
+            description: ""
+            type: string
+            maxLength: 100
+          otherPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          otherPhoneType:
+            description: ""
+            type: string
+            enum:
+            - Work
+            - Mobile
+            - Home
+            - Other
+          personalEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          state:
+            description: ""
+            type: string
+            maxLength: 40
+          taxRegion:
+            description: ""
+            type: string
+            maxLength: 32
+          workEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          workPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      collect:
+        description: ""
+        type: string
+      communicationProfileId:
+        description: ""
+        type: string
+      creditCard:
+        description: ""
+        required:
+        - cardHolderInfo
+        - cardNumber
+        - cardType
+        - expirationMonth
+        - expirationYear
+        properties:
+          cardHolderInfo:
+            description: ""
+            required:
+            - addressLine1
+            - cardHolderName
+            - city
+            - country
+            - state
+            - zipCode
+            properties:
+              addressLine1:
+                description: ""
+                type: string
+                maxLength: 255
+              addressLine2:
+                description: ""
+                type: string
+                maxLength: 255
+              cardHolderName:
+                description: ""
+                type: string
+                maxLength: 50
+              city:
+                description: ""
+                type: string
+                maxLength: 40
+              country:
+                description: ""
+                type: string
+                maxLength: 64
+              email:
+                description: ""
+                type: string
+                maxLength: 80
+              phone:
+                description: ""
+                type: string
+                maxLength: 40
+              state:
+                description: ""
+                type: string
+                maxLength: 50
+              zipCode:
+                description: ""
+                type: string
+                maxLength: 20
+            type: object
+          cardNumber:
+            description: ""
+            type: string
+          cardType:
+            description: ""
+            type: string
+            enum:
+            - Visa
+            - MasterCard
+            - AmericanExpress
+            - Discover
+          expirationMonth:
+            description: ""
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 12
+          expirationYear:
+            description: ""
+            type: integer
+            format: int32
+            minimum: 1980
+            maximum: 2500            
+          securityCode:
+            description: ""
+            type: string
+
+        type: object
+      crmId:
+        description: ""
+        type: string
+        maxLength: 100
+      currency:
+        description: ""
+        type: string
+        minLength: 3
+        maxLength: 3
+      customField__c:
+        description: ""
+        type: string
+      hpmCreditCardPaymentMethodId:
+        description: ""
+        type: string
+      invoice:
+        description: ""
+        type: string
+      invoiceCollect:
+        description: ""
+        type: boolean
+      invoiceTargetDate:
+        description: ""
+        format: date
+        type: string
+      invoiceTemplateId:
+        description: ""
+        type: string
+      name:
+        description: ""
+        type: string
+        maxLength: 255
+      notes:
+        description: ""
+        type: string
+        maxLength: 65535
+      paymentGateway:
+        description: ""
+        type: string
+        maxLength: 40
+      paymentTerm:
+        description: ""
+        type: string
+      soldToContact:
+        description: ""
+        required:
+        - firstName
+        - lastName
+        properties:
+          address1:
+            description: ""
+            type: string
+            maxLength: 255
+          address2:
+            description: ""
+            type: string
+            maxLength: 255
+          city:
+            description: ""
+            type: string
+            maxLength: 40
+          country:
+            description: ""
+            type: string
+            maxLength: 64
+          county:
+            description: ""
+            type: string
+            maxLength: 32
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+            maxLength: 40
+          firstName:
+            description: ""
+            type: string
+            maxLength: 100
+          homePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          lastName:
+            description: ""
+            type: string
+            maxLength: 100
+          mobilePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          nickname:
+            description: ""
+            type: string
+            maxLength: 100
+          otherPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          otherPhoneType:
+            description: ""
+            type: string
+            enum:
+            - Work
+            - Mobile
+            - Home
+            - Other
+          personalEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          state:
+            description: ""
+            type: string
+            maxLength: 40
+          taxRegion:
+            description: ""
+            type: string
+            maxLength: 32
+          workEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          workPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      subscription:
+        description: ""
+        required:
+        - contractEffectiveDate
+        - termType
+        properties:
+          CpqBundleJsonId__QT:
+            description: ""
+            type: string
+          OpportunityCloseDate__QT:
+            description: ""
+            type: string
+          OpportunityName__QT:
+            description: ""
+            type: string
+          QuoteBusinessType__QT:
+            description: ""
+            type: string
+          QuoteNumber__QT:
+            description: ""
+            type: string
+          QuoteType__QT:
+            description: ""
+            type: string
+          autoRenew:
+            description: ""
+            type: boolean
+          contractEffectiveDate:
+            description: ""
+            format: date
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          customerAcceptanceDate:
+            description: ""
+            format: date
+            type: string
+          initialTerm:
+            description: ""
+            format: int64
+            type: integer
+            minimum: 1
+            maximum: 100
+          invoiceOwnerAccountKey:
+            description: ""
+            type: string
+          invoiceSeparately:
+            description: ""
+            type: boolean
+            default: false
+          notes:
+            description: ""
+            type: string
+            maxLength: 500
+          renewalTerm:
+            description: ""
+            format: int64
+            type: integer
+            minimum: 0
+            maximum: 100
+          serviceActivationDate:
+            description: ""
+            format: date
+            type: string
+          subscribeToRatePlans:
+            description: ""
+            items:
+              $ref: '#/definitions/POSTSrpCreateType'
+            type: array
+          subscriptionNumber:
+            description: ""
+            type: string
+            maxLength: 100
+          termStartDate:
+            description: ""
+            format: date
+            type: string
+          termType:
+            description: ""
+            type: string
+            enum: 
+            - TERMED
+            - EVERGREEN
+
+        type: object
+      tagging:
+        description: ""
+        type: string
+      taxInfo:
+        description: ""
+        properties:
+          VATId:
+            description: ""
+            type: string
+            maxLength: 25
+          companyCode:
+            description: ""
+            type: string
+            maxLength: 50
+          exemptCertificateId:
+            description: ""
+            type: string
+            maxLength: 32
+          exemptCertificateType:
+            description: ""
+            type: string
+            maxLength: 32
+          exemptDescription:
+            description: ""
+            type: string
+            maxLength: 500
+          exemptEffectiveDate:
+            description: ""
+            format: date
+            type: string
+            pattern: \\d{4}-\\d{1,2}-\\d{1,2}
+          exemptExpirationDate:
+            description: ""
+            format: date
+            type: string
+            pattern: \\d{4}-\\d{1,2}-\\d{1,2}
+          exemptIssuingJurisdiction:
+            description: ""
+            type: string
+            maxLength: 32
+          exemptStatus:
+            description: ""
+            type: string
+            enum:
+              - Yes
+              - No
+              - pendingVerification
+            default: No
+        type: object
+    type: object
+  POSTScCreateType:
+    required:
+    - productRatePlanChargeId
+    - quantity
+    properties:
+      applyDiscountTo:
+        description: ""
+        type: string
+      billCycleDay:
+        description: ""
+        type: string
+      billCycleType:
+        description: ""
+        type: string
+      billingPeriod:
+        description: ""
+        type: string
+      billingPeriodAlignment:
+        description: ""
+        type: string
+      billingTiming:
+        description: ""
+        type: string
+      customField__c:
+        description: ""
+        type: string
+      description:
+        description: ""
+        type: string
+      discountAmount:
+        description: ""
+        format: decimal
+        type: string
+      discountLevel:
+        description: ""
+        type: string
+      discountPercentage:
+        description: ""
+        format: decimal
+        type: string
+      endDateCondition:
+        description: ""
+        type: string
+      includedUnits:
+        description: ""
+        format: decimal
+        type: string
+      listPriceBase:
+        description: ""
+        type: string
+      number:
+        description: ""
+        type: string
+      numberOfPeriods:
+        description: ""
+        format: int64
+        type: integer
+      overagePrice:
+        description: ""
+        format: decimal
+        type: string
+      overageUnusedUnitsCreditOption:
+        description: ""
+        type: string
+      price:
+        description: ""
+        format: decimal
+        type: string
+      priceChangeOption:
+        description: ""
+        type: string
+      priceIncreasePercentage:
+        description: ""
+        format: decimal
+        type: string
+      productRatePlanChargeId:
+        description: ""
+        type: string
+      quantity:
+        description: ""
+        format: decimal
+        type: string
+      ratingGroup:
+        description: ""
+        type: string
+      specificBillingPeriod:
+        description: ""
+        format: int64
+        type: integer
+      specificEndDate:
+        description: ""
+        format: date
+        type: string
+      tiers:
+        description: ""
+        items:
+          $ref: '#/definitions/POSTTierType'
+        type: array
+      triggerDate:
+        description: ""
+        format: date
+        type: string
+      triggerEvent:
+        description: ""
+        type: string
+      unusedUnitsCreditRates:
+        description: ""
+        format: decimal
+        type: string
+      upToPeriods:
+        description: ""
+        format: int64
+        type: integer
+      upToPeriodsType:
+        description: ""
+        type: string
+      weeklyBillCycleDay:
+        description: ""
+        type: string
+
+    title: chargeOverrides
+    type: object
+  POSTSrpCreateType:
+    required:
+    - productRatePlanId
+    properties:
+      chargeOverrides:
+        description: ""
+        items:
+          $ref: '#/definitions/POSTScCreateType'
+        type: array
+      customField__c:
+        description: ""
+        type: string
+      productRatePlanId:
+        description: ""
+        type: string
+
+    type: object
+  POSTTierType:
+    properties:
+      endingUnit:
+        description: ""
+        format: decimal
+        type: string
+      price:
+        description: ""
+        format: decimal
+        type: string
+      priceFormat:
+        description: ""
+        type: string
+      startingUnit:
+        description: ""
+        format: decimal
+        type: string
+      tier:
+        description: ""
+        format: int64
+        type: integer
+    title: tiers
+    type: object
+  PUTAccountType:
+    example:
+      paymentGateway: TestGateway
+    properties:
+      autoPay:
+        description: ""
+        type: boolean
+      batch:
+        description: ""
+        type: string
+      billToContact:
+        description: ""
+        required:
+        - firstName
+        - lastName
+        properties:
+          address1:
+            description: ""
+            type: string
+            maxLength: 255
+          address2:
+            description: ""
+            type: string
+            maxLength: 255
+          city:
+            description: ""
+            type: string
+            maxLength: 40
+          country:
+            description: ""
+            type: string
+            maxLength: 64
+          county:
+            description: ""
+            type: string
+            maxLength: 32
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+            maxLength: 40
+          firstName:
+            description: ""
+            type: string
+            maxLength: 100
+          homePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          lastName:
+            description: ""
+            type: string
+            maxLength: 100
+          mobilePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          nickname:
+            description: ""
+            type: string
+            maxLength: 100
+          otherPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          otherPhoneType:
+            description: ""
+            type: string
+            enum:
+            - Work
+            - Mobile
+            - Home
+            - Other
+          personalEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          state:
+            description: ""
+            type: string
+            maxLength: 40
+          taxRegion:
+            description: ""
+            type: string
+            maxLength: 32
+          workEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          workPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      communicationProfileId:
+        description: ""
+        type: string
+      crmId:
+        description: ""
+        type: string
+        maxLength: 100
+      customField__c:
+        description: ""
+        type: string
+      invoiceTemplateId:
+        description: ""
+        type: string
+      name:
+        description: ""
+        type: string
+        minLength: 1
+        maxLength: 50
+      notes:
+        description: ""
+        type: string
+        maxLength: 65535
+      paymentGateway:
+        description: ""
+        type: string
+        maxLength: 40
+      soldToContact:
+        description: ""
+        required:
+        - firstName
+        - lastName
+        properties:
+          address1:
+            description: ""
+            type: string
+            maxLength: 255
+          address2:
+            description: ""
+            type: string
+            maxLength: 255
+          city:
+            description: ""
+            type: string
+            maxLength: 40
+          country:
+            description: ""
+            type: string
+            maxLength: 64
+          county:
+            description: ""
+            type: string
+            maxLength: 32
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+            maxLength: 40
+          firstName:
+            description: ""
+            type: string
+            maxLength: 100
+          homePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          lastName:
+            description: ""
+            type: string
+            maxLength: 100
+          mobilePhone:
+            description: ""
+            type: string
+            maxLength: 40
+          nickname:
+            description: ""
+            type: string
+            maxLength: 100
+          otherPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          otherPhoneType:
+            description: ""
+            type: string
+            enum:
+            - Work
+            - Mobile
+            - Home
+            - Other
+          personalEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          state:
+            description: ""
+            type: string
+            maxLength: 40
+          taxRegion:
+            description: ""
+            type: string
+            maxLength: 32
+          workEmail:
+            description: ""
+            type: string
+            maxLength: 80
+          workPhone:
+            description: ""
+            type: string
+            maxLength: 40
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      tagging:
+        description: ""
+        type: string
+      taxInfo:
+        description: ""
+        properties:
+          VATId:
+            description: ""
+            type: string
+            maxLength: 25
+          companyCode:
+            description: ""
+            type: string
+            maxLength: 50
+          exemptCertificateId:
+            description: ""
+            type: string
+            maxLength: 32
+          exemptCertificateType:
+            description: ""
+            type: string
+            maxLength: 32
+          exemptDescription:
+            description: ""
+            type: string
+            maxLength: 500
+          exemptEffectiveDate:
+            description: ""
+            format: date
+            type: string
+            pattern: \\d{4}-\\d{1,2}-\\d{1,2}
+          exemptExpirationDate:
+            description: ""
+            format: date
+            type: string
+            pattern: \\d{4}-\\d{1,2}-\\d{1,2}
+          exemptIssuingJurisdiction:
+            description: ""
+            type: string
+            maxLength: 32
+          exemptStatus:
+            description: ""
+            type: string
+            enum:
+              - Yes
+              - No
+              - pendingVerification
+            default: No
+        type: object
+    type: object
+    
+  GETAccountSummaryInvoiceType:
+    properties:
+      amount:
+        description: ""
+        format: decimal
+        type: string
+      balance:
+        description: ""
+        format: decimal
+        type: string
+      dueDate:
+        description: ""
+        format: date
+        type: string
+      id:
+        description: ""
+        type: string
+      invoiceDate:
+        description: ""
+        format: date
+        type: string
+      invoiceNumber:
+        description: ""
+        type: string
+      status:
+        description: ""
+        type: string
+    title: invoices
+    type: object
+  GETAccountSummaryPaymentInvoiceType:
+    properties:
+      appliedPaymentAmount:
+        description: ""
+        format: decimal
+        type: string
+      invoiceId:
+        description: ""
+        type: string
+      invoiceNumber:
+        description: ""
+        type: string
+    title: paidInvoices
+    type: object
+  GETAccountSummaryPaymentType:
+    properties:
+      effectiveDate:
+        description: ""
+        format: date
+        type: string
+      id:
+        description: ""
+        type: string
+      paidInvoices:
+        description: ""
+        items:
+          $ref: '#/definitions/GETAccountSummaryPaymentInvoiceType'
+        type: array
+      paymentNumber:
+        description: ""
+        type: string
+      paymentType:
+        description: ""
+        type: string
+      status:
+        description: ""
+        type: string
+    title: payments
+    type: object
+  GETAccountSummarySubscriptionRatePlanType:
+    properties:
+      productId:
+        description: ""
+        type: string
+      productName:
+        description: ""
+        type: string
+      productRatePlanId:
+        description: ""
+        type: string
+      productSku:
+        description: ""
+        type: string
+      ratePlanName:
+        description: ""
+        type: string
+    title: ratePlans
+    type: object
+  GETAccountSummarySubscriptionType:
+    properties:
+      CpqBundleJsonId__QT:
+        description: ""
+        type: string
+      OpportunityCloseDate__QT:
+        description: ""
+        type: string
+      OpportunityName__QT:
+        description: ""
+        type: string
+      QuoteBusinessType__QT:
+        description: ""
+        type: string
+      QuoteNumber__QT:
+        description: ""
+        type: string
+      QuoteType__QT:
+        description: ""
+        type: string
+      autoRenew:
+        description: ""
+        type: boolean
+      customField__c:
+        description: ""
+        type: string
+      id:
+        description: ""
+        type: string
+      initialTerm:
+        description: ""
+        type: string
+      ratePlans:
+        description: ""
+        items:
+          $ref: '#/definitions/GETAccountSummarySubscriptionRatePlanType'
+        type: array
+      renewalTerm:
+        description: ""
+        type: string
+      status:
+        description: ""
+        type: string
+      subscriptionNumber:
+        description: ""
+        type: string
+      subscriptionStartDate:
+        description: ""
+        format: date
+        type: string
+      termEndDate:
+        description: ""
+        format: date
+        type: string
+      termStartDate:
+        description: ""
+        format: date
+        type: string
+      termType:
+        description: ""
+        type: string
+    title: subscriptions
+    type: object
+  GETAccountSummaryType:
+    properties:
+      basicInfo:
+        description: ""
+        properties:
+          accountNumber:
+            description: ""
+            type: string
+          balance:
+            description: ""
+            format: decimal
+            type: string
+          batch:
+            description: ""
+            type: string
+          billCycleDay:
+            description: ""
+            type: string
+          currency:
+            description: ""
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          defaultPaymentMethod:
+            description: ""
+            properties:
+              creditCardExpirationMonth:
+                description: ""
+                type: string
+              creditCardExpirationYear:
+                description: ""
+                type: string
+              creditCardNumber:
+                description: ""
+                type: string
+              creditCardType:
+                description: ""
+                type: string
+              id:
+                description: ""
+                type: string
+              paymentMethodType:
+                description: ""
+                type: string
+            type: object
+          id:
+            description: ""
+            type: string
+          lastInvoiceDate:
+            description: ""
+            format: date
+            type: string
+          lastPaymentAmount:
+            description: ""
+            format: decimal
+            type: string
+          lastPaymentDate:
+            description: ""
+            format: date
+            type: string
+          name:
+            description: ""
+            type: string
+          status:
+            description: ""
+            type: string
+          tags:
+            description: ""
+            type: string
+        type: object
+      billToContact:
+        description: ""
+        properties:
+          address1:
+            description: ""
+            type: string
+          address2:
+            description: ""
+            type: string
+          city:
+            description: ""
+            type: string
+          country:
+            description: ""
+            type: string
+          county:
+            description: ""
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+          firstName:
+            description: ""
+            type: string
+          id:
+            description: ""
+            type: string
+          lastName:
+            description: ""
+            type: string
+          state:
+            description: ""
+            type: string
+          taxRegion:
+            description: ""
+            type: string
+          workEmail:
+            description: ""
+            type: string
+          workPhone:
+            description: ""
+            type: string
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      invoices:
+        description: ""
+        items:
+          $ref: '#/definitions/GETAccountSummaryInvoiceType'
+        type: array
+      payments:
+        description: ""
+        items:
+          $ref: '#/definitions/GETAccountSummaryPaymentType'
+        type: array
+      soldToContact:
+        description: ""
+        properties:
+          address1:
+            description: ""
+            type: string
+          address2:
+            description: ""
+            type: string
+          city:
+            description: ""
+            type: string
+          country:
+            description: ""
+            type: string
+          county:
+            description: ""
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+          firstName:
+            description: ""
+            type: string
+          id:
+            description: ""
+            type: string
+          lastName:
+            description: ""
+            type: string
+          state:
+            description: ""
+            type: string
+          taxRegion:
+            description: ""
+            type: string
+          workEmail:
+            description: ""
+            type: string
+          workPhone:
+            description: ""
+            type: string
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      subscriptions:
+        description: ""
+        items:
+          $ref: '#/definitions/GETAccountSummarySubscriptionType'
+        type: array
+      success:
+        description: ""
+        type: boolean
+      taxInfo:
+        description: ""
+        properties:
+          VATId:
+            description: ""
+            type: string
+          companyCode:
+            description: ""
+            type: string
+          exemptCertificateId:
+            description: ""
+            type: string
+          exemptCertificateType:
+            description: ""
+            type: string
+          exemptDescription:
+            description: ""
+            type: string
+          exemptEffectiveDate:
+            description: ""
+            format: date
+            type: string
+          exemptExpirationDate:
+            description: ""
+            format: date
+            type: string
+          exemptIssuingJurisdiction:
+            description: ""
+            type: string
+          exemptStatus:
+            description: ""
+            type: string
+        type: object
+      usage:
+        description: ""
+        items:
+          $ref: '#/definitions/GETAccountSummaryUsageType'
+        type: array
+    type: object
+  GETAccountSummaryUsageType:
+    properties:
+      quantity:
+        description: ""
+        format: decimal
+        type: string
+      startDate:
+        description: ""
+        format: date
+        type: string
+      unitOfMeasure:
+        description: ""
+        type: string
+    title: usage
+    type: object
+  GETAccountType:
+    properties:
+      basicInfo:
+        description: ""
+        properties:
+          accountNumber:
+            description: ""
+            type: string
+          batch:
+            description: ""
+            type: string
+          communicationProfileId:
+            description: ""
+            type: string
+          crmId:
+            description: ""
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          id:
+            description: ""
+            type: string
+          invoiceTemplateId:
+            description: ""
+            type: string
+          name:
+            description: ""
+            type: string
+          notes:
+            description: ""
+            type: string
+          status:
+            description: ""
+            type: string
+          tags:
+            description: ""
+            type: string
+        type: object
+      billToContact:
+        description: ""
+        properties:
+          address1:
+            description: ""
+            type: string
+          address2:
+            description: ""
+            type: string
+          city:
+            description: ""
+            type: string
+          country:
+            description: ""
+            type: string
+          county:
+            description: ""
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+          firstName:
+            description: ""
+            type: string
+          homePhone:
+            description: ""
+            type: string
+          lastName:
+            description: ""
+            type: string
+          mobilePhone:
+            description: ""
+            type: string
+          nickname:
+            description: ""
+            type: string
+          otherPhone:
+            description: ""
+            type: string
+          otherPhoneType:
+            description: ""
+            type: string
+          personalEmail:
+            description: ""
+            type: string
+          state:
+            description: ""
+            type: string
+          taxRegion:
+            description: ""
+            type: string
+          workEmail:
+            description: ""
+            type: string
+          workPhone:
+            description: ""
+            type: string
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      billingAndPayment:
+        description: ""
+        properties:
+          billCycleDay:
+            description: ""
+            type: string
+          currency:
+            description: ""
+            type: string
+          paymentGateway:
+            description: ""
+            type: string
+          paymentTerm:
+            description: ""
+            type: string
+        type: object
+      metrics:
+        description: ""
+        properties:
+          balance:
+            description: ""
+            format: decimal
+            type: string
+          contractedMrr:
+            description: ""
+            format: decimal
+            type: string
+          creditBalance:
+            description: ""
+            format: decimal
+            type: string
+          totalInvoiceBalance:
+            description: ""
+            format: decimal
+            type: string
+        type: object
+      soldToContact:
+        description: ""
+        properties:
+          address1:
+            description: ""
+            type: string
+          address2:
+            description: ""
+            type: string
+          city:
+            description: ""
+            type: string
+          country:
+            description: ""
+            type: string
+          county:
+            description: ""
+            type: string
+          customField__c:
+            description: ""
+            type: string
+          fax:
+            description: ""
+            type: string
+          firstName:
+            description: ""
+            type: string
+          homePhone:
+            description: ""
+            type: string
+          lastName:
+            description: ""
+            type: string
+          mobilePhone:
+            description: ""
+            type: string
+          nickname:
+            description: ""
+            type: string
+          otherPhone:
+            description: ""
+            type: string
+          otherPhoneType:
+            description: ""
+            type: string
+          personalEmail:
+            description: ""
+            type: string
+          state:
+            description: ""
+            type: string
+          taxRegion:
+            description: ""
+            type: string
+          workEmail:
+            description: ""
+            type: string
+          workPhone:
+            description: ""
+            type: string
+          zipCode:
+            description: ""
+            type: string
+        type: object
+      success:
+        description: ""
+        type: boolean
+      taxInfo:
+        description: ""
+        properties:
+          VATId:
+            description: ""
+            type: string
+          companyCode:
+            description: ""
+            type: string
+          exemptCertificateId:
+            description: ""
+            type: string
+          exemptCertificateType:
+            description: ""
+            type: string
+          exemptDescription:
+            description: ""
+            type: string
+          exemptEffectiveDate:
+            description: ""
+            format: date
+            type: string
+          exemptExpirationDate:
+            description: ""
+            format: date
+            type: string
+          exemptIssuingJurisdiction:
+            description: ""
+            type: string
+          exemptStatus:
+            description: ""
+            type: string
+        type: object
+    type: object
+  POSTAccountResponseType:
+    properties:
+      accountId:
+        description: ""
+        type: string
+      accountNumber:
+        description: ""
+        type: string
+      contractedMrr:
+        description: ""
+        format: decimal
+        type: string
+      invoiceId:
+        description: ""
+        type: string
+      paidAmount:
+        description: ""
+        format: decimal
+        type: string
+      paymentId:
+        description: ""
+        type: string
+      paymentMethodId:
+        description: ""
+        type: string
+      subscriptionId:
+        description: ""
+        type: string
+      subscriptionNumber:
+        description: ""
+        type: string
+      success:
+        description: ""
+        type: boolean
+      totalContractedValue:
+        description: ""
+        format: decimal
+        type: string
+    type: object
